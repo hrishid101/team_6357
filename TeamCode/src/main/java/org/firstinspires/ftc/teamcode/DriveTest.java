@@ -24,7 +24,7 @@ public class DriveTest extends LinearOpMode {
         telemetry.update();
 
         //Initialize Motors
-        //NEED TO SET DEVICE NAME
+        //TODO NEED TO SET DEVICE NAME
         leftFront  = hardwareMap.get(DcMotor.class, "");
         rightFront = hardwareMap.get(DcMotor.class, "");
         leftBack  = hardwareMap.get(DcMotor.class, "");
