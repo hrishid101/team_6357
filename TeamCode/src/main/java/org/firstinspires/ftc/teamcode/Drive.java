@@ -7,7 +7,7 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.util.ElapsedTime;
 import com.qualcomm.robotcore.util.Range;
 
-@TeleOp(name="Drive V3", group="Linear Opmode")
+@TeleOp(name="Motor Test", group="Linear Opmode")
 //@Disabled
 public class Drive extends LinearOpMode {
 
@@ -27,10 +27,10 @@ public class Drive extends LinearOpMode {
         telemetry.update();
 
         //Initialize Wheel Motors
-        leftFront  = hardwareMap.get(DcMotor.class, "frontLeft");
-        rightFront = hardwareMap.get(DcMotor.class, "frontRight");
-        leftBack  = hardwareMap.get(DcMotor.class, "backLeft");
-        rightBack = hardwareMap.get(DcMotor.class, "backRight");
+//        leftFront  = hardwareMap.get(DcMotor.class, "frontLeft");
+//        rightFront = hardwareMap.get(DcMotor.class, "frontRight");
+//        leftBack  = hardwareMap.get(DcMotor.class, "backLeft");
+//        rightBack = hardwareMap.get(DcMotor.class, "backRight");
 
         //Initialize General Use Motors
         carouselWheel  = hardwareMap.get(DcMotor.class, "carousel");
@@ -38,14 +38,14 @@ public class Drive extends LinearOpMode {
         intakeWheel = hardwareMap.get(DcMotor.class, "intake");
 
         //Set wheel directions
-        leftFront.setDirection(DcMotor.Direction.FORWARD);
-        leftBack.setDirection(DcMotor.Direction.FORWARD);
-        rightFront.setDirection(DcMotor.Direction.REVERSE);
-        rightBack.setDirection(DcMotor.Direction.REVERSE);
+//        leftFront.setDirection(DcMotor.Direction.FORWARD);
+//        leftBack.setDirection(DcMotor.Direction.FORWARD);
+//        rightFront.setDirection(DcMotor.Direction.REVERSE);
+//        rightBack.setDirection(DcMotor.Direction.REVERSE);
 
         //Set motor directions
         carouselWheel.setDirection(DcMotor.Direction.FORWARD);
-        linearSlide.setDirection(DcMotor.Direction.FORWARD);
+        linearSlide.setDirection(DcMotor.Direction.REVERSE);
         intakeWheel.setDirection(DcMotor.Direction.FORWARD);
 
         // Wait for the game to start (driver presses PLAY)
@@ -57,35 +57,36 @@ public class Drive extends LinearOpMode {
 
             // LEFT STICK FORWARD BACKWARD
             // RIGHT STICK FOR TURNING
-            double drive = -gamepad1.right_stick_y;
-            double turn = gamepad1.left_stick_x;
+//            double drive = -gamepad1.right_stick_y;
+//            double turn = gamepad1.left_stick_x;
 
             //R1 FOR CAROUSEL
             //DPAD UP/DOWN FOR LINEAR SLIDE
             //X FOR INTAKE WHEEL
+
             boolean spin = gamepad1.right_bumper;
             boolean dPadUp = gamepad1.dpad_up;
             boolean dPadDown = gamepad1.dpad_down;
             boolean xButton = gamepad1.x;
 
             // Send calculated power to wheels
-            leftFront.setPower(drive);
-            leftBack.setPower(drive);
-            rightFront.setPower(drive);
-            rightBack.setPower(drive);
+//            leftFront.setPower(drive);
+//            leftBack.setPower(drive);
+//            rightFront.setPower(drive);
+//            rightBack.setPower(drive);
 
-            if(turn > 0.0){
-                leftFront.setPower(1.0);
-                leftBack.setPower(1.0);
-                rightFront.setPower(0.0);
-                rightBack.setPower(0.0);
-            }
-            else if(turn < 0.0){
-                leftFront.setPower(0.0);
-                leftBack.setPower(0.0);
-                rightFront.setPower(1.0);
-                rightBack.setPower(1.0);
-            }
+//            if(turn > 0.0){
+//                leftFront.setPower(1.0);
+//                leftBack.setPower(1.0);
+//                rightFront.setPower(-1.0);
+//                rightBack.setPower(-1.0);
+//            }
+//            else if(turn < 0.0){
+//                leftFront.setPower(-1.0);
+//                leftBack.setPower(-1.0);
+//                rightFront.setPower(1.0);
+//                rightBack.setPower(1.0);
+//            }
 
             //Setting power to Carousel Motor
             if(spin) {
@@ -112,6 +113,8 @@ public class Drive extends LinearOpMode {
             }else {
                 intakeWheel.setPower(0.0);
             }
+
+
 
             // Show the elapsed game time and wheel power.
             telemetry.addData("Status", "Run Time: " + runtime.toString());
