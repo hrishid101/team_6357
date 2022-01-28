@@ -44,7 +44,7 @@ public class Drive extends LinearOpMode {
 //        rightBack.setDirection(DcMotor.Direction.REVERSE);
 
         //Set motor directions
-        carouselWheel.setDirection(DcMotor.Direction.FORWARD);
+        carouselWheel.setDirection(DcMotor.Direction.REVERSE);
         linearSlide.setDirection(DcMotor.Direction.REVERSE);
         intakeWheel.setDirection(DcMotor.Direction.FORWARD);
 
