@@ -20,6 +20,7 @@ public class Drive extends LinearOpMode {
     private DcMotor leftBack;
     private DcMotor rightFront;
     private DcMotor rightBack;
+    private DcMotor slide;
 
     @Override
     public void runOpMode() {
@@ -31,6 +32,7 @@ public class Drive extends LinearOpMode {
         rightFront = hardwareMap.get(DcMotor.class, "frontRight");
         leftBack  = hardwareMap.get(DcMotor.class, "backLeft");
         rightBack = hardwareMap.get(DcMotor.class, "backRight");
+        slide = hardwareMap.get(DcMotor.class, "slide");
 
 
         //Set wheel directions
@@ -38,6 +40,8 @@ public class Drive extends LinearOpMode {
         leftBack.setDirection(DcMotor.Direction.FORWARD);
         rightFront.setDirection(DcMotor.Direction.REVERSE);
         rightBack.setDirection(DcMotor.Direction.REVERSE);
+
+        slide.setDirection(DcMotor.Direction.FORWARD);
 
         // Wait for the game to start (driver presses PLAY)
         waitForStart();
@@ -48,9 +52,11 @@ public class Drive extends LinearOpMode {
 
             // LEFT STICK FORWARD BACKWARD
             // RIGHT STICK FOR TURNING
-            double drive = -gamepad2.right_stick_y;
-            double strafe = gamepad2.right_stick_x;
-            double turn = gamepad2.left_stick_x;
+            double drive = -gamepad1.right_stick_y;
+            double strafe = gamepad1.right_stick_x;
+            double turn = gamepad1.left_stick_x;
+            boolean linearUp = gamepad1.dpad_up;
+            boolean linearDown = gamepad1.dpad_down;
 
             // Send calculated power to wheels
             leftFront.setPower(drive);
@@ -86,6 +92,13 @@ public class Drive extends LinearOpMode {
                 leftBack.setPower(0.75);
                 rightFront.setPower(-0.75);
                 rightBack.setPower(-0.75);
+            }
+
+            if(linearDown){
+                slide.setPower(-0.5);
+            }
+            else if(linearUp){
+                slide.setPower(0.5);
             }
 
             // Show the elapsed game time and wheel power.
